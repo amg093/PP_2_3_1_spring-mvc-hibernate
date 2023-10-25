@@ -13,6 +13,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
+    private final String REDIRECT_MAIN = "redirect:allUsers";
     private final UserService userService;
 
     @Autowired
@@ -43,7 +44,7 @@ public class UserController {
     @PostMapping(value = "/addUser")
     public String addUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return "redirect:allUsers";
+        return REDIRECT_MAIN;
     }
 
     @GetMapping(value = "/editUser")
@@ -55,13 +56,13 @@ public class UserController {
     @PostMapping(value = "/editUser")
     public String editUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
-        return "redirect:allUsers";
+        return REDIRECT_MAIN;
     }
 
-    @RequestMapping(value = "/deleteUser")
+    @GetMapping(value = "/deleteUser")
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:allUsers";
+        return REDIRECT_MAIN;
     }
 
 }
